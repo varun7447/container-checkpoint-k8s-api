@@ -125,6 +125,8 @@ kubectl get ingress checkpoint-ingress
 
 **Test the API**
 
+```
 curl -X POST http://<ALB-DNS-NAME>/checkpoint \
      -H "Content-Type: application/json" \
      -d '{"podId": "your-pod-id", "ecrRepo": "your-ecr-repo", "awsRegion": "your-aws-region"}'
+```
