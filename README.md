@@ -33,7 +33,7 @@ kubectl apply -f deployment.yaml
 
 In deployment.yaml update the following line.
 
-*image: <your-docker-repo>/checkpoint-container:v1*
+*image: `<your-docker-repo>`/checkpoint-container:v1*
 
 **Kubernetes Service**
 
