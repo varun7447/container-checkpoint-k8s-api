@@ -1,16 +1,16 @@
-# Container Checkpoint API
+# Container checkpoint k8s api
 
 Container checkpoint in Kubernetes using `ctr`
 
 #### Prerequisites
 * Kubernetes cluster
-* Install ctr commandline tool. (if you are able to run ctr commands on the kubelet/worker node, if not install/adjust AMI to contain the ctr. https://github.com/containerd/containerd/tree/main/cmd/ctr)
+* Install ctr commandline tool. if you are able to run ctr commands on the kubelet/worker node, if not install/adjust AMI to contain the ctr. https://github.com/containerd/containerd/tree/main/cmd/ctr
 * kubectl configured to communicate with your cluster
 * Docker installed locally
-* Access to a container registry (e.g., ECR)
-* Helm (for installing Nginx/ALB Ingress Controller)
+* Access to a container registry (e.g., Docker Hub, ECR)
+* Helm (for installing Nginx Ingress Controller)
 
-#### Initialize the go module
+#### Step 1: Initialize the go module
 ```sh
 go mod init checkpoint_container
 ```
@@ -41,7 +41,7 @@ require (
 go mod tidy
 ```
 
-#### Build and Publish Docker Image**
+#### Step 2: Build and Publish Docker Image**
 
 ```sh
 docker build -t <your-docker-repo>/checkpoint-container:v1 .
@@ -50,13 +50,13 @@ docker push <your-docker-repo>/checkpoint-container:v1
 
 *Replace ```<your-docker-repo>``` with your actual Docker repository.*
 
-#### Apply the RBAC resources
+#### Step 3: Apply the RBAC resources
 
 ```sh
 kubectl apply -f rbac.yaml
 ```
 
-#### Deployment
+#### Step 4: Deployment
 
 ```sh
 kubectl apply -f deployment.yaml
@@ -65,13 +65,13 @@ In deployment.yaml update the following
 
 *image: `<your-docker-repo>`/checkpoint-container:v1*
 
-#### Kubernetes Service
+#### Step 5: Kubernetes Service
 
 ```sh
 kubectl apply -f service.yaml
 ```
 
-#### Install Ngnix Ingress Contoller
+#### Step 6: Install Ngnix Ingress Contoller
 
 ```sh
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
@@ -80,7 +80,7 @@ helm install ingress-nginx ingress-nginx/ingress-nginx
 kubectl apply -f ingress.yaml
 ```
 
-#### Test the API
+#### Step 7: Test the API
 
 ```sh
 kubectl get services ingress-ngnix-contoller -n ingress-ngnix
