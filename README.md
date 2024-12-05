@@ -1,4 +1,4 @@
-# Container checkpoint k8s api
+# Container Checkpoint API
 
 Container checkpoint in Kubernetes using `ctr`
 
