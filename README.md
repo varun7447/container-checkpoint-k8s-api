@@ -10,6 +10,41 @@ Container checkpoint in Kubernetes using `crt`
 * Access to a container registry (e.g., Docker Hub, ECR)
 * Helm (for installing Nginx Ingress Controller)
 
+**Initialize the go module**
+
+```
+go mod init checkpoint_container
+```
+
+Modify the go.mod file
+
+```
+module checkpoint_container
+
+go 1.20
+
+require (
+	github.com/aws/aws-sdk-go v1.44.298
+	github.com/containerd/containerd v1.7.2
+)
+
+require (
+	github.com/jmespath/go-jmespath v0.4.0 // indirect
+	github.com/opencontainers/go-digest v1.0.0 // indirect
+	github.com/opencontainers/image-spec v1.1.0-rc2.0.20221005185240-3a7f492d3f1b // indirect
+	github.com/pkg/errors v0.9.1 // indirect
+	google.golang.org/genproto v0.0.0-20230306155012-7f2fa6fef1f4 // indirect
+	google.golang.org/grpc v1.53.0 // indirect
+	google.golang.org/protobuf v1.30.0 // indirect
+)
+```
+
+*Run:*
+
+```
+go mod tidy
+```
+
 **Build and Publish Docker Image**
 
 ```
