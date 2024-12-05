@@ -1,15 +1,20 @@
-FROM golang:1.20 as builder
+# Build stage
+FROM golang:1.23 as builder
 
 WORKDIR /app
 COPY . .
-RUN CGO_ENABLED=0 GOOS=linux go build -o checkpoint_container
+RUN GOPROXY=direct CGO_ENABLED=0 GOOS=linux go build -o checkpoint_container
 
-FROM amazon/aws-cli
+# Final stage
+FROM amazonlinux:2
 
+# Install necessary tools
 RUN yum update -y && \
-    yum install -y containerd buildah podman && \
+    amazon-linux-extras install -y docker && \
+    yum install -y awscli containerd skopeo && \
     yum clean all
 
+# Copy the built Go binary
 COPY --from=builder /app/checkpoint_container /usr/local/bin/checkpoint_container
 
 EXPOSE 8080
