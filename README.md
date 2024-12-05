@@ -4,11 +4,11 @@ Container checkpoint in Kubernetes using `ctr`
 
 #### Prerequisites
 * Kubernetes cluster
-* Install ctr commandline tool. if you are able to run ctr commands on the kubelet/worker node, if not install/adjust AMI to contain the ctr. https://github.com/containerd/containerd/tree/main/cmd/ctr
+* Install ctr commandline tool. (if you are able to run ctr commands on the kubelet/worker node, if not install/adjust AMI to contain the ctr. https://github.com/containerd/containerd/tree/main/cmd/ctr)
 * kubectl configured to communicate with your cluster
 * Docker installed locally
-* Access to a container registry (e.g., Docker Hub, ECR)
-* Helm (for installing Nginx Ingress Controller)
+* Access to a container registry (e.g., ECR)
+* Helm (for installing Nginx/ALB Ingress Controller)
 
 #### Initialize the go module
 ```sh
